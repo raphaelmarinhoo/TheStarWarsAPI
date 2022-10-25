@@ -14,27 +14,27 @@ const routes: Routes = [
     component: IndexComponent,
   },
   {
-    path: '/films',
+    path: 'films',
     component: FilmsComponent,
   },
   {
-    path: '/peoples',
+    path: 'peoples',
     component: PeoplesComponent,
   },
   {
-    path: '/planets',
+    path: 'planets',
     component: PlanetsComponent,
   },
   {
-    path: '/species',
+    path: 'species',
     component: SpeciesComponent,
   },
   {
-    path: '/starships',
+    path: 'starships',
     component: StarshipsComponent,
   },
   {
-    path: '/vehicles',
+    path: 'vehicles',
     component: VehiclesComponent,
   }
 ];
