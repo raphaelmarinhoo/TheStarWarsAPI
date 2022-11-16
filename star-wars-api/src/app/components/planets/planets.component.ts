@@ -7,24 +7,14 @@ import { SwapiService } from 'src/app/services/swapi.service';
   templateUrl: './planets.component.html',
   styleUrls: ['./planets.component.scss']
 })
-export class PlanetsComponent implements OnInit {
-  planets: any;
-  error: any;
+export class PlanetsComponent {
+  data: Planet[] = [];
+  columnsToDisplay = ['title'];
 
   constructor(private swapiService: SwapiService) {
-    this.getPlanets()
-  }
-
-  ngOnInit(): void {}
-
-  getPlanets() {
-    this.swapiService.planetGetData().subscribe(
-      (data: Planet) => {
-        this.planets = data;
-      },
-      (error: any) => {
-        this.error = error;
-      }
-    );
+    this.swapiService.planetGetData().subscribe(x => {
+    this.data = x;
+    console.log(this.data);
+    })
   }
 }

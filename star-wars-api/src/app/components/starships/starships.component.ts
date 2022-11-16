@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Starship } from 'src/app/models/starships.model';
 import { SwapiService } from 'src/app/services/swapi.service';
 
@@ -7,24 +7,14 @@ import { SwapiService } from 'src/app/services/swapi.service';
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss']
 })
-export class StarshipsComponent implements OnInit {
-  starships: any;
-  error: any;
+export class StarshipsComponent {
+  data: Starship[] = [];
+  columnsToDisplay = ['title'];
 
   constructor(private swapiService: SwapiService) {
-    this.getStarships()
-  }
-
-  ngOnInit(): void {}
-
-  getStarships() {
-    this.swapiService.starshipGetData().subscribe(
-      (data: Starship) => {
-        this.starships = data;
-      },
-      (error: any) => {
-        this.error = error;
-      }
-    );
+    this.swapiService.starshipGetData().subscribe(x => {
+    this.data = x;
+    console.log(this.data);
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { People } from 'src/app/models/peoples.model';
 import { SwapiService } from 'src/app/services/swapi.service';
 
@@ -7,24 +7,14 @@ import { SwapiService } from 'src/app/services/swapi.service';
   templateUrl: './peoples.component.html',
   styleUrls: ['./peoples.component.scss']
 })
-export class PeoplesComponent implements OnInit {
-  peoples: any;
-  error: any;
+export class PeoplesComponent {
+  data: People[] = [];
+  columnsToDisplay = ['title'];
 
   constructor(private swapiService: SwapiService) {
-    this.getPeoples()
-  }
-
-  ngOnInit(): void {}
-
-  getPeoples() {
-    this.swapiService.peopleGetData().subscribe(
-      (data: People) => {
-        this.peoples = data;
-      },
-      (error: any) => {
-        this.error = error;
-      }
-    );
+    this.swapiService.peopleGetData().subscribe(x => {
+    this.data = x;
+    console.log(this.data);
+    })
   }
 }

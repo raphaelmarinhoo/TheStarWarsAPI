@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Species } from 'src/app/models/species.model';
 import { SwapiService } from 'src/app/services/swapi.service';
 
@@ -7,24 +7,14 @@ import { SwapiService } from 'src/app/services/swapi.service';
   templateUrl: './species.component.html',
   styleUrls: ['./species.component.scss']
 })
-export class SpeciesComponent implements OnInit {
-  species: any;
-  error: any;
+export class SpeciesComponent {
+  data: Species[] = [];
+  columnsToDisplay = ['title'];
 
   constructor(private swapiService: SwapiService) {
-    this.getSpecies()
-  }
-
-  ngOnInit(): void {}
-
-  getSpecies() {
-    this.swapiService.speciesGetData().subscribe(
-      (data: Species) => {
-        this.species = data;
-      },
-      (error: any) => {
-        this.error = error;
-      }
-    );
+    this.swapiService.speciesGetData().subscribe(x => {
+    this.data = x;
+    console.log(this.data);
+    })
   }
 }

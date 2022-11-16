@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Vehicle } from 'src/app/models/vehicles.model';
 import { SwapiService } from 'src/app/services/swapi.service';
 
@@ -7,24 +7,15 @@ import { SwapiService } from 'src/app/services/swapi.service';
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.scss']
 })
-export class VehiclesComponent implements OnInit {
-  vehicles: any;
-  error: any;
+
+export class VehiclesComponent {
+  data: Vehicle[] = [];
+  columnsToDisplay = ['title'];
 
   constructor(private swapiService: SwapiService) {
-    this.getVehicles()
-  }
-
-  ngOnInit(): void {}
-
-  getVehicles() {
-    this.swapiService.vehicleGetData().subscribe(
-      (data: Vehicle) => {
-        this.vehicles = data;
-      },
-      (error: any) => {
-        this.error = error;
-      }
-    );
+    this.swapiService.vehicleGetData().subscribe(x => {
+    this.data = x;
+    console.log(this.data);
+    })
   }
 }

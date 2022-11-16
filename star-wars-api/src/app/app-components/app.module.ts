@@ -10,11 +10,18 @@ import { SpeciesComponent } from '../components/species/species.component';
 import { StarshipsComponent } from '../components/starships/starships.component';
 import { PeoplesComponent } from '../components/peoples/peoples.component';
 import { VehiclesComponent } from '../components/vehicles/vehicles.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
+    NavBarComponent,
     FilmsComponent,
     PeoplesComponent,
     PlanetsComponent,
@@ -22,7 +29,16 @@ import { VehiclesComponent } from '../components/vehicles/vehicles.component';
     StarshipsComponent,
     VehiclesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+  ],
   providers: [HttpClient],
   bootstrap: [AppComponent],
 })
