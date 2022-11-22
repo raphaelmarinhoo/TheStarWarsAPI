@@ -9,14 +9,13 @@ import { Starship } from '../models/starships.model';
 import { Species } from '../models/species.model';
 
 export interface GetFilmsInformation {
-  results: string[]
+  results: string[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SwapiService {
-
   constructor(private http: HttpClient) {}
 
   public filmGetData(): Observable<GetFilmsInformation> {
