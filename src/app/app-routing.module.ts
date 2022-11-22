@@ -1,12 +1,12 @@
-import { VehiclesComponent } from './../components/vehicles/vehicles.component';
-import { StarshipsComponent } from './../components/starships/starships.component';
-import { SpeciesComponent } from './../components/species/species.component';
-import { PlanetsComponent } from './../components/planets/planets.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { StarshipsComponent } from './components/starships/starships.component';
+import { SpeciesComponent } from './components/species/species.component';
+import { PlanetsComponent } from './components/planets/planets.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FilmsComponent } from '../components/films/films.component';
-import { IndexComponent } from '../components/index/index.component';
-import { PeoplesComponent } from '../components/peoples/peoples.component';
+import { FilmsComponent } from './components/films/films.component';
+import { IndexComponent } from './components/index/index.component';
+import { PeoplesComponent } from './components/peoples/peoples.component';
 
 const routes: Routes = [
   {

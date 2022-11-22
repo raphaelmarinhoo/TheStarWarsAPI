@@ -1,0 +1,16 @@
+<mat-toolbar class="navbar">
+  <button mat-mini-fab [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="">Home</a>
+    <a mat-menu-item routerLink="films">Films</a>
+    <a mat-menu-item routerLink="peoples">Peoples</a>
+    <a mat-menu-item routerLink="planets">Planets</a>
+    <a mat-menu-item routerLink="species">Species</a>
+    <a mat-menu-item routerLink="starships">Starships</a>
+    <a mat-menu-item routerLink="vehicles">Vehicles</a>
+  </mat-menu>
+  <span class="title">Star Wars Wiki</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>

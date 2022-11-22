@@ -8,6 +8,10 @@ import { Planet } from '../models/planets.model';
 import { Starship } from '../models/starships.model';
 import { Species } from '../models/species.model';
 
+export interface GetFilmsInformation {
+  results: string[]
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,8 +19,8 @@ export class SwapiService {
 
   constructor(private http: HttpClient) {}
 
-  public filmGetData(): Observable<Film[]> {
-    return this.http.get<Film[]>('https://swapi.dev/api/films');
+  public filmGetData(): Observable<GetFilmsInformation> {
+    return this.http.get<GetFilmsInformation>('https://swapi.dev/api/films');
   }
 
   public peopleGetData(): Observable<People[]> {
