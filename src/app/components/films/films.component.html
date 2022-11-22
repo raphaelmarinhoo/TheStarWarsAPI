@@ -1,6 +1,6 @@
 <mat-form-field appearance="standard">
   <mat-label>Filter Table </mat-label>
-  <input matInput placeholder="" search />
+  <input matInput placeholder="" search (keyup)="applyFilter($event)" #input/>
 </mat-form-field>
 
 <div>
@@ -22,7 +22,17 @@
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+
+    <!-- Mostra quando os dados não existem -->
+    <tr>
+      <td class="mat-cell" colspan="4">
+        The filter does not match any item in the data for this text {{input.value}}
+      </td>
+    </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[3, 6]" aria-labels="select page of films"></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[3, 6]"
+    aria-labels="select page of films"
+  ></mat-paginator>
 </div>
