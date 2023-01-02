@@ -1,14 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Film } from '../models/films.model';
-import { People } from '../models/peoples.model';
-import { Vehicle } from '../models/vehicles.model';
-import { Planet } from '../models/planets.model';
-import { Starship } from '../models/starships.model';
-import { Species } from '../models/species.model';
 
-export interface GetFilmsInformation {
+export interface GetInformation {
   results: string[];
 }
 
@@ -18,27 +12,27 @@ export interface GetFilmsInformation {
 export class SwapiService {
   constructor(private http: HttpClient) {}
 
-  public filmGetData(): Observable<GetFilmsInformation> {
-    return this.http.get<GetFilmsInformation>('https://swapi.dev/api/films');
+  public filmGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/films');
   }
 
-  public peopleGetData(): Observable<People[]> {
-    return this.http.get<People[]>('https://swapi.dev/api/people');
+  public peopleGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/people');
   }
 
-  public planetGetData(): Observable<Planet[]> {
-    return this.http.get<Planet[]>('https://swapi.dev/api/planets');
+  public planetGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/planets');
   }
 
-  public starshipGetData(): Observable<Starship[]> {
-    return this.http.get<Starship[]>('https://swapi.dev/api/starships');
+  public starshipGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/starships');
   }
 
-  public speciesGetData(): Observable<Species[]> {
-    return this.http.get<Species[]>('https://swapi.dev/api/species');
+  public speciesGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/species');
   }
 
-  public vehicleGetData(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>('https://swapi.dev/api/vehicles');
+  public vehicleGetData(): Observable<GetInformation> {
+    return this.http.get<GetInformation>('https://swapi.dev/api/vehicles');
   }
 }

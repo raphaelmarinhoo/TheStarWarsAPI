@@ -1,7 +1,6 @@
-import { Film } from './../../models/films.model';
 import {
   SwapiService,
-  GetFilmsInformation,
+  GetInformation,
 } from './../../services/swapi.service';
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,7 +13,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./films.component.scss'],
 })
 export class FilmsComponent {
-  dataSource!: MatTableDataSource<GetFilmsInformation>;
+  dataSource!: MatTableDataSource<GetInformation>;
   columnsToDisplay: string[] = ['episode_id', 'title', 'opening_crawl'];
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
