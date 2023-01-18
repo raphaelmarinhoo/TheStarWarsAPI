@@ -22,7 +22,7 @@ export class FilmsComponent {
   films: Film[] = [];
   disabled: boolean = false;
   length: number = 6;
-  pageSize: number = 3;
+  pageSize: number = 6;
   pageIndex: number = 0;
 
   constructor(private swapiService: SwapiService) {
