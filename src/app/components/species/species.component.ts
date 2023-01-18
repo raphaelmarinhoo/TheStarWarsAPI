@@ -1,27 +1,38 @@
+import { Species } from './../../model/species.model';
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GetInformation, SwapiService } from 'src/app/services/swapi.service';
+import { SwapiService } from 'src/app/services/swapi.service';
 
 @Component({
   selector: 'app-species',
   templateUrl: './species.component.html',
-  styleUrls: ['./species.component.scss']
+  styleUrls: ['./species.component.scss'],
 })
 export class SpeciesComponent {
-  dataSource!: MatTableDataSource<GetInformation>;
-  columnsToDisplay: string[] = ['name', 'classification', 'designation', 'average_height', 'average_lifespan', 'language'];
+  dataSource!: MatTableDataSource<Species>;
+  columnsToDisplay: string[] = [
+    'name',
+    'classification',
+    'designation',
+    'average_height',
+    'average_lifespan',
+    'language',
+  ];
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  posts: any;
+  @ViewChild('paginator') paginator!: MatPaginator;
+  species: Species[] = [];
+  disabled: boolean = false;
+  length: number = 37;
+  pageSize: number = 10;
+  pageIndex: number = 0;
 
   constructor(private swapiService: SwapiService) {
     this.swapiService.speciesGetData().subscribe((data) => {
       console.log(data);
-      this.posts = data.results;
-      this.dataSource = new MatTableDataSource(this.posts);
-      this.dataSource.paginator = this.paginator;
+      this.species = data.results;
+      this.dataSource = new MatTableDataSource(this.species);
       this.dataSource.sort = this.sort;
     });
   }
@@ -32,5 +43,12 @@ export class SpeciesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  changePage(event: PageEvent) {
+    this.swapiService.speciesGetData(event.pageIndex + 1).subscribe((data) => {
+      this.species = data.results;
+      this.dataSource.data = this.species;
+    });
   }
 }

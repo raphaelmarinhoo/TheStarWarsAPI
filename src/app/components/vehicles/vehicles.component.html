@@ -1,58 +1,59 @@
-
 <mat-form-field appearance="standard">
-    <mat-label>Filter Table </mat-label>
-    <input matInput placeholder="" search (keyup)="applyFilter($event)" #input />
-  </mat-form-field>
+  <mat-label>Filter Table </mat-label>
+  <input matInput placeholder="" search (keyup)="applyFilter($event)" #input />
+</mat-form-field>
 
-  <div class="mat-elevation-z8">
-    <table mat-table matSort [dataSource]="dataSource">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
+<div class="mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="model">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>model</th>
-        <td mat-cell *matCellDef="let element">{{ element.model }}</td>
-      </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+      <td mat-cell *matCellDef="let element">{{ element.model }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="manufacturer">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>manufacturer</th>
-        <td mat-cell *matCellDef="let element">{{ element.manufacturer }}</td>
-      </ng-container>
+    <ng-container matColumnDef="manufacturer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturer</th>
+      <td mat-cell *matCellDef="let element">{{ element.manufacturer }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="cost_in_credits">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>cost_in_credits</th>
-        <td mat-cell *matCellDef="let element">{{ element.cost_in_credits }}</td>
-      </ng-container>
+    <ng-container matColumnDef="cost_in_credits">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cost in credits</th>
+      <td mat-cell *matCellDef="let element">{{ element.cost_in_credits }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="length">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            length
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.length }}</td>
-      </ng-container>
+    <ng-container matColumnDef="length">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Length</th>
+      <td mat-cell *matCellDef="let element">{{ element.length }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="passengers">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>passengers</th>
-        <td mat-cell *matCellDef="let element">{{ element.passengers }}</td>
-      </ng-container>
+    <ng-container matColumnDef="passengers">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Passengers</th>
+      <td mat-cell *matCellDef="let element">{{ element.passengers }}</td>
+    </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
 
-      <!-- Mostra quando os dados não existem -->
-      <tr *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          The filter does not match any item in the data for this text: "{{
-            input.value
-          }}"
-        </td>
-      </tr>
-    </table>
+    <!-- Mostra quando os dados não existem -->
+    <tr *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        The filter does not match any item in the data for this text: "{{
+          input.value
+        }}"
+      </td>
+    </tr>
+  </table>
 
-    <mat-paginator
-      [pageSizeOptions]="[10, 20]"
-      aria-labels="select page of vehicles"
-    ></mat-paginator>
-  </div>
+  <mat-paginator
+    #paginator
+    [disabled]="disabled"
+    (page)="changePage($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+  ></mat-paginator>
+</div>

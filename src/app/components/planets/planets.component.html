@@ -59,7 +59,11 @@
   </table>
 
   <mat-paginator
-    [pageSizeOptions]="[10, 20]"
-    aria-labels="select page of planets"
+    #paginator
+    [disabled]="disabled"
+    (page)="changePage($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
   ></mat-paginator>
 </div>

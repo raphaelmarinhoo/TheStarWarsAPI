@@ -1,10 +1,8 @@
-import {
-  SwapiService,
-  GetInformation,
-} from './../../services/swapi.service';
+import { Film } from './../../model/film.model';
+import { SwapiService } from './../../services/swapi.service';
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -13,18 +11,26 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./films.component.scss'],
 })
 export class FilmsComponent {
-  dataSource!: MatTableDataSource<GetInformation>;
-  columnsToDisplay: string[] = ['episode_id', 'title', 'opening_crawl'];
+  dataSource!: MatTableDataSource<Film>;
+  columnsToDisplay: string[] = [
+    'episode_id',
+    'title',
+    'opening_crawl',
+    'characters',
+  ];
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  posts: any;
+  @ViewChild('paginator') paginator!: MatPaginator;
+  films: Film[] = [];
+  disabled: boolean = false;
+  length: number = 6;
+  pageSize: number = 3;
+  pageIndex: number = 0;
 
   constructor(private swapiService: SwapiService) {
     this.swapiService.filmGetData().subscribe((data) => {
       console.log(data);
-      this.posts = data.results;
-      this.dataSource = new MatTableDataSource(this.posts);
-      this.dataSource.paginator = this.paginator;
+      this.films = data.results;
+      this.dataSource = new MatTableDataSource(this.films);
       this.dataSource.sort = this.sort;
     });
   }
@@ -35,5 +41,12 @@ export class FilmsComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  changePage(event: PageEvent) {
+    this.swapiService.filmGetData(event.pageIndex + 1).subscribe((data) => {
+      this.films = data.results;
+      this.dataSource.data = this.films;
+    });
   }
 }

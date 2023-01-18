@@ -1,27 +1,41 @@
+import { Planet } from './../../model/planet.model';
+import { PlanetResponse } from './../../services/swapi.service';
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GetInformation, SwapiService } from 'src/app/services/swapi.service';
+import { SwapiService } from 'src/app/services/swapi.service';
 
 @Component({
   selector: 'app-planets',
   templateUrl: './planets.component.html',
-  styleUrls: ['./planets.component.scss']
+  styleUrls: ['./planets.component.scss'],
 })
 export class PlanetsComponent {
-  dataSource!: MatTableDataSource<GetInformation>;
-  columnsToDisplay: string[] = ['name', 'rotation_period', 'orbital_period', 'diameter', 'climate', 'gravity', 'terrain', 'population'];
+  dataSource!: MatTableDataSource<Planet>;
+  columnsToDisplay: string[] = [
+    'name',
+    'rotation_period',
+    'orbital_period',
+    'diameter',
+    'climate',
+    'gravity',
+    'terrain',
+    'population',
+  ];
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  posts: any;
+  @ViewChild('paginator') paginator!: MatPaginator;
+  planets: Planet[] = [];
+  disabled: boolean = false;
+  length: number = 60;
+  pageSize: number = 10;
+  pageIndex: number = 0;
 
   constructor(private swapiService: SwapiService) {
     this.swapiService.planetGetData().subscribe((data) => {
       console.log(data);
-      this.posts = data.results;
-      this.dataSource = new MatTableDataSource(this.posts);
-      this.dataSource.paginator = this.paginator;
+      this.planets = data.results;
+      this.dataSource = new MatTableDataSource(this.planets);
       this.dataSource.sort = this.sort;
     });
   }
@@ -32,5 +46,12 @@ export class PlanetsComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  changePage(event: PageEvent) {
+    this.swapiService.planetGetData(event.pageIndex + 1).subscribe((data) => {
+      this.planets = data.results;
+      this.dataSource.data = this.planets;
+    });
   }
 }
