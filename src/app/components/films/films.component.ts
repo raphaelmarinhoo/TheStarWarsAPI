@@ -15,8 +15,7 @@ export class FilmsComponent {
   columnsToDisplay: string[] = [
     'episode_id',
     'title',
-    'opening_crawl',
-    'characters',
+    'opening_crawl'
   ];
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild('paginator') paginator!: MatPaginator;
